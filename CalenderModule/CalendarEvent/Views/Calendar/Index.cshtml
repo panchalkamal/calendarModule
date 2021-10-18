@@ -1,0 +1,33 @@
+﻿@model CalendarEvent.ViewModels.CalendarView
+
+@using Newtonsoft.Json;
+@using Newtonsoft.Json.Serialization;
+
+<script src="https://cdn.jsdelivr.net/npm/@@fullcalendar/core@4.2.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@fullcalendar/daygrid@4.2.0/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@fullcalendar/interaction@4.2.0/main.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@@fullcalendar/core@4.2.0/main.min.css" rel="stylesheet" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h1>Calendar</h1>
+<hr>
+<div id="calendar"></div>
+
+<script type="text/javascript">
+        
+    var json = @Html.Raw(JsonConvert.SerializeObject(Model.events));
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            height: 600,
+            plugins: ['dayGrid', 'interaction'],
+            events: json
+        });
+        calendar.render();
+    });
+</script>
